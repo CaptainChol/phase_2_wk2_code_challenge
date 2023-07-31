@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BotCollection from './BotCollection';
 import YourBotArmy from './YourBotArmy';
 import SortBar from './SortBar';
+import './App.css';
 
 const App = () => {
   const [bots, setBots] = useState([]);
@@ -25,14 +26,14 @@ const App = () => {
   };
 
   const dischargeFromService = (botId) => {
-    fetch(`http://localhost:8004/bots/${botId}`, { method: 'DELETE' })
-      .then(() => {
-        setArmy(army.filter((b) => b.id !== botId));
-        setBots(bots.filter((b) => b.id !== botId));
-      })
-      .catch((error) => console.error('Error discharging bot:', error));
-  };
-  
+  fetch(`http://localhost:8004/bots/${botId}`, { method: 'DELETE' })
+    .then(() => {
+      setArmy(army.filter((b) => b.id !== botId));
+      setBots(bots.filter((b) => b.id !== botId));
+    })
+    .catch((error) => console.error('Error discharging bot:', error));
+};
+
   const handleSort = (sortType) => {
     if (sortType) {
       const sortedBots = [...bots].sort((a, b) => b[sortType] - a[sortType]);
